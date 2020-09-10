@@ -1,4 +1,4 @@
-package com.example.newyorktimesapp.entity.request
+package com.example.newyorktimesapp.entities
 
 
 import com.google.gson.annotations.SerializedName
