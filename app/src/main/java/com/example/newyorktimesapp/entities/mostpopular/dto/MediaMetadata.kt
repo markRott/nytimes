@@ -1,4 +1,4 @@
-package com.example.newyorktimesapp.entities
+package com.example.newyorktimesapp.entities.mostpopular.dto
 
 
 import com.google.gson.annotations.SerializedName
