@@ -23,4 +23,8 @@ data class MostPopularArticleUI(
     val geoFacet: List<String>,
     val media: List<MediaUI>,
     val etaId: Int
-)
+) {
+    fun getImageUrl(): String = media.firstOrNull()?.mediaMetadata?.lastOrNull()?.url ?: ""
+
+    fun getCopyright(): String = media.firstOrNull()?.copyright ?: ""
+}

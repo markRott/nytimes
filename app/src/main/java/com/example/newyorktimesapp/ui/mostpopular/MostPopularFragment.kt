@@ -1,7 +1,6 @@
 package com.example.newyorktimesapp.ui.mostpopular
 
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MostPopularFragment : Fragment() {
 
+    private val adapter: MostPopularAdapter = MostPopularAdapter()
     private val mostPopularVM: MostPopularVM by viewModel()
 
     override fun onCreateView(
@@ -30,6 +30,8 @@ class MostPopularFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        rcv_most_popular.adapter = adapter
 
         observeData()
         observeLoadingState()
@@ -46,7 +48,7 @@ class MostPopularFragment : Fragment() {
 
     private fun observeData() {
         mostPopularVM.data.observe(viewLifecycleOwner, {
-
+            adapter.setItems(it.results)
         })
     }
 

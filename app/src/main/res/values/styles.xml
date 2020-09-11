@@ -8,4 +8,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="RoundedTopLeftRightImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/most_popular_round</item>
+        <item name="cornerSizeTopLeft">@dimen/most_popular_round</item>
+    </style>
+
 </resources>
