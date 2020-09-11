@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">NewYorkTimesApp</string>
-    <string name="title_home">Home</string>
+    <string name="title_most_popular">Most Popular</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="most_popular_articles">Most popular articles</string>
+    <string name="most_emailed_articles">Most emailed articles</string>
+    <string name="most_shared_articles">Most shared articles</string>
+    <string name="most_viewed_articles">Most viewed articles</string>
+    <string name="period">Time period</string>
+    <string name="_1_day">1 day</string>
+    <string name="_7_days">7 days</string>
+    <string name="_30_days">30 days</string>
+    <string name="comments">comments</string>
 </resources>
