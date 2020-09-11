@@ -1,10 +1,8 @@
 package com.example.newyorktimesapp.data
 
+import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularUI
+
 interface MostPopularRepository {
 
-    fun fetchMostViewedArticles()
-
-    fun fetchMostEmailedArticles()
-
-    fun fetchMostSharedArticles()
+    suspend fun fetchMostPopularArticles(type: String, period: Int): MostPopularUI
 }

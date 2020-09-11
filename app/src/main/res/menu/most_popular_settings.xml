@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/emailed"
+        android:title="@string/most_emailed_articles"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/shared"
+        android:title="@string/most_shared_articles" />
+
+    <item
+        android:id="@+id/viewed"
+        android:title="@string/most_viewed_articles" />
+
+    <item
+        android:id="@+id/select_days"
+        android:title="@string/period">
+        <menu>
+            <item
+                android:id="@+id/_1_day"
+                android:title="@string/_1_day" />
+            <item
+                android:id="@+id/_7_day"
+                android:title="@string/_7_days" />
+            <item
+                android:id="@+id/_30_day"
+                android:title="@string/_30_days" />
+        </menu>
+
+    </item>
+
+</menu>
