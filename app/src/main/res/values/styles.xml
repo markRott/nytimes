@@ -14,4 +14,9 @@
         <item name="cornerSizeTopLeft">@dimen/most_popular_round</item>
     </style>
 
+    <style name="CircleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">39dp</item>
+    </style>
+
 </resources>

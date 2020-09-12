@@ -1,6 +1,7 @@
 package com.example.newyorktimesapp
 
 import android.app.Application
+import com.example.newyorktimesapp.di.commentsModule
 import com.example.newyorktimesapp.di.databaseModule
 import com.example.newyorktimesapp.di.mostPopularModule
 import com.example.newyorktimesapp.di.networkModule
@@ -17,7 +18,8 @@ class MyApp : Application() {
             modules(
                 networkModule,
                 databaseModule,
-                mostPopularModule
+                mostPopularModule,
+                commentsModule
             )
         }
     }

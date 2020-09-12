@@ -7,4 +7,5 @@
     <color name="black">#000000</color>
     <color name="black_20">#33000000</color>
     <color name="black_60">#99000000</color>
+    <color name="card_bg_gray">#eeeeee</color>
 </resources>

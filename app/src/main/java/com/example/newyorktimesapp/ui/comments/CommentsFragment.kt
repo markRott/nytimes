@@ -24,8 +24,6 @@ class CommentsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val url = arguments?.getString(KEY_URL) ?: ""
-        println("url = $url")
-
         iv_back_from_comments.setOnClickListener { findNavController().popBackStack() }
     }
 }
