@@ -1,4 +1,4 @@
-package com.example.newyorktimesapp.ui.mostpopular
+package com.example.newyorktimesapp.ui.mostpopular.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

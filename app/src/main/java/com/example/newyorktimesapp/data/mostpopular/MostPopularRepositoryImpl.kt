@@ -1,4 +1,4 @@
-package com.example.newyorktimesapp.data
+package com.example.newyorktimesapp.data.mostpopular
 
 import com.example.newyorktimesapp.api.AppApi
 import com.example.newyorktimesapp.db.FavoriteArticleDao

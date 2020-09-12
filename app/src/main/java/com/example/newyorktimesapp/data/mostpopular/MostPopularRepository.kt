@@ -1,4 +1,4 @@
-package com.example.newyorktimesapp.data
+package com.example.newyorktimesapp.data.mostpopular
 
 import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularArticleUI
 import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularUI
