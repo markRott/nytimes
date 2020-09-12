@@ -1,6 +1,7 @@
 package com.example.newyorktimesapp
 
 import android.app.Application
+import com.example.newyorktimesapp.di.databaseModule
 import com.example.newyorktimesapp.di.mostPopularModule
 import com.example.newyorktimesapp.di.networkModule
 import org.koin.android.ext.koin.androidContext
@@ -15,6 +16,7 @@ class MyApp : Application() {
             androidContext(this@MyApp)
             modules(
                 networkModule,
+                databaseModule,
                 mostPopularModule
             )
         }

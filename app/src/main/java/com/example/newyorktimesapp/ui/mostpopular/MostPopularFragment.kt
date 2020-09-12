@@ -17,39 +17,55 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MostPopularFragment : Fragment() {
 
-    private val adapter: MostPopularAdapter = MostPopularAdapter()
+    private val adapter: MostPopularAdapter = MostPopularAdapter { data ->
+        when (data) {
+            is ArticleClickPayload.ArticleAction -> { }
+            is ArticleClickPayload.CommentsAction -> { }
+            is ArticleClickPayload.FavoriteAction -> {
+                mostPopularVM.favoriteAction(data.favoriteState, data.model)
+            }
+        }
+    }
+
     private val mostPopularVM: MostPopularVM by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.frg_most_popular, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.frg_most_popular, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         rcv_most_popular.adapter = adapter
 
-        observeData()
+        observeArticlesData()
         observeLoadingState()
+        observeFavoriteIds()
+
         showSettingsMenu()
 
+        mostPopularVM.fetchFavoriteIds()
         mostPopularVM.type = MostPopularType.EMAILED
     }
 
     private fun observeLoadingState() {
-        mostPopularVM.loadingState.observe(viewLifecycleOwner, {
+        mostPopularVM.loadingState.observe(viewLifecycleOwner) {
             frm_progress.isVisible = it
-        })
+        }
     }
 
-    private fun observeData() {
-        mostPopularVM.data.observe(viewLifecycleOwner, {
-            adapter.setItems(it.results)
-        })
+    private fun observeArticlesData() {
+        mostPopularVM.data.observe(viewLifecycleOwner) {
+            adapter.setArticleItems(it.results)
+        }
+    }
+
+    private fun observeFavoriteIds() {
+        mostPopularVM.favoriteIds.observe(viewLifecycleOwner) {
+            adapter.setFavoriteItems(it)
+        }
     }
 
     private fun showSettingsMenu() {

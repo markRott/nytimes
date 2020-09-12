@@ -18,16 +18,6 @@ class MostPopularArticle(
     val publishedDate: String?,
     @SerializedName("updated")
     val updated: String?,
-    @SerializedName("section")
-    val section: String?,
-    @SerializedName("subsection")
-    val subsection: String?,
-    @SerializedName("nytdsection")
-    val nytdsection: String?,
-    @SerializedName("adx_keywords")
-    val adxKeywords: String?,
-    @SerializedName("column")
-    val column: Any?,
     @SerializedName("byline")
     val byline: String?,
     @SerializedName("type")
@@ -35,19 +25,9 @@ class MostPopularArticle(
     @SerializedName("title")
     val title: String?,
     @SerializedName("abstract")
-    val abstract: String?,
-    @SerializedName("des_facet")
-    val desFacet: List<String>?,
-    @SerializedName("org_facet")
-    val orgFacet: List<String>?,
-    @SerializedName("per_facet")
-    val perFacet: List<String>?,
-    @SerializedName("geo_facet")
-    val geoFacet: List<String>?,
+    val subTitle: String?,
     @SerializedName("media")
-    val media: List<Media>?,
-    @SerializedName("eta_id")
-    val etaId: Int?
+    val media: List<Media>?
 )
 
 fun List<MostPopularArticle>.toDomain(): List<MostPopularArticleUI> {
@@ -62,19 +42,9 @@ private fun MostPopularArticle.toDomain(): MostPopularArticleUI = MostPopularArt
     source = source ?: "",
     publishedDate = publishedDate ?: "",
     updated = updated ?: "",
-    section = section ?: "",
-    subsection = subsection ?: "",
-    nytdsection = nytdsection ?: "",
-    adxKeywords = adxKeywords ?: "",
-    column = column ?: Any(),
     byline = byline ?: "",
-    type = type ?: "",
     title = title ?: "",
-    abstract = abstract ?: "",
-    desFacet = desFacet ?: emptyList(),
-    orgFacet = orgFacet ?: emptyList(),
-    perFacet = perFacet ?: emptyList(),
-    geoFacet = geoFacet ?: emptyList(),
-    media = media?.toDomain() ?: emptyList(),
-    etaId = etaId ?: 0
+    subTitle = subTitle ?: "",
+    imageUrl = media?.firstOrNull()?.mediaMetadata?.lastOrNull()?.url ?: "",
+    copyright = media?.firstOrNull()?.copyright ?: ""
 )
