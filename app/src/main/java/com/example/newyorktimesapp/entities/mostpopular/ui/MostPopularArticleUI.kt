@@ -1,30 +1,35 @@
 package com.example.newyorktimesapp.entities.mostpopular.ui
 
-data class MostPopularArticleUI(
-    val uri: String,
-    val url: String,
-    val id: Long,
-    val assetId: Long,
-    val source: String,
-    val publishedDate: String,
-    val updated: String,
-    val section: String,
-    val subsection: String,
-    val nytdsection: String,
-    val adxKeywords: String,
-    val column: Any,
-    val byline: String,
-    val type: String,
-    val title: String,
-    val abstract: String,
-    val desFacet: List<String>,
-    val orgFacet: List<String>,
-    val perFacet: List<String>,
-    val geoFacet: List<String>,
-    val media: List<MediaUI>,
-    val etaId: Int
-) {
-    fun getImageUrl(): String = media.firstOrNull()?.mediaMetadata?.lastOrNull()?.url ?: ""
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
-    fun getCopyright(): String = media.firstOrNull()?.copyright ?: ""
-}
+@Entity(tableName = "favorite_articles")
+class MostPopularArticleUI(
+    @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: Long,
+    @ColumnInfo(name = "uri")
+    val uri: String,
+    @ColumnInfo(name = "url")
+    val url: String,
+    @ColumnInfo(name = "asset_id")
+    val assetId: Long,
+    @ColumnInfo(name = "source")
+    val source: String,
+    @ColumnInfo(name = "published_date")
+    val publishedDate: String,
+    @ColumnInfo(name = "updated")
+    val updated: String,
+    @ColumnInfo(name = "byline")
+    val byline: String,
+    @ColumnInfo(name = "title")
+    val title: String,
+    @ColumnInfo(name = "sub_title")
+    val subTitle: String,
+    @ColumnInfo(name = "image_url")
+    val imageUrl: String,
+    @ColumnInfo(name = "copyright")
+    val copyright: String
+)

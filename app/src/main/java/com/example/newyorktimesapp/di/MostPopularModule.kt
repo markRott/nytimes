@@ -7,6 +7,6 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val mostPopularModule = module {
-    single<MostPopularRepository> { MostPopularRepositoryImpl(get()) }
+    single<MostPopularRepository> { MostPopularRepositoryImpl(api = get(), dao = get()) }
     viewModel { MostPopularVM(get()) }
 }
