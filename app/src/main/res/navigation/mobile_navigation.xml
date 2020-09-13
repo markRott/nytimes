@@ -9,7 +9,11 @@
         android:id="@+id/most_popular"
         android:name="com.example.newyorktimesapp.ui.mostpopular.MostPopularFragment"
         android:label="@string/title_most_popular"
-        tools:layout="@layout/frg_most_popular" />
+        tools:layout="@layout/frg_most_popular">
+        <action
+            android:id="@+id/action_most_popular_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +26,16 @@
         android:name="com.example.newyorktimesapp.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.example.newyorktimesapp.ui.comments.CommentsFragment"
+        android:label="frg_comments"
+        tools:layout="@layout/frg_comments">
+        <argument
+            android:name="url"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+
 </navigation>

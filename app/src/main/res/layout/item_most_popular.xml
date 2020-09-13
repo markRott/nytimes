@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="15dp"
-    app:cardBackgroundColor="#eeeeee"
+    app:cardBackgroundColor="@color/card_bg_gray"
     app:cardCornerRadius="@dimen/most_popular_round"
     app:cardElevation="2dp">
 
@@ -19,11 +19,12 @@
             android:layout_height="140dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundedTopLeftRightImageView"
 
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/RoundedTopLeftRightImageView" />
+            />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_copyright"
