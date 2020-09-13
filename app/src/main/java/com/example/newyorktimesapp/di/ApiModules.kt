@@ -1,5 +1,6 @@
 package com.example.newyorktimesapp.di
 
+import androidx.lifecycle.viewModelScope
 import com.example.newyorktimesapp.data.comments.CommentsRepository
 import com.example.newyorktimesapp.data.comments.CommentsRepositoryImpl
 import com.example.newyorktimesapp.data.mostpopular.MostPopularRepository
@@ -18,8 +19,7 @@ val mostPopularModule = module {
 }
 
 val commentsModule = module {
-    single { CoroutineScope(Dispatchers.IO) }
     single<CommentsRepository> { CommentsRepositoryImpl(api = get()) }
-    single { CommentsDataSourceFactory(repo = get(), scope = get()) }
-    viewModel { CommentsVM(dsFactory = get()) }
+//    single { CommentsDataSourceFactory(repo = get(), scope = get<CommentsVM>().viewModelScope) }
+    viewModel { CommentsVM(get()) }
 }

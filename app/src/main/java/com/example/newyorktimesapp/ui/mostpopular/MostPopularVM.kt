@@ -59,10 +59,6 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
         }
     }
 
-    private fun changeLoadingState(state: Boolean) {
-        _loadingState.value = state
-    }
-
     private fun getType(): String = type?.popularType ?: MostPopularType.EMAILED.popularType
 
     private fun getTimePeriod(): Int = timePeriod?.timePeriod ?: TimePeriod.ONE_DAY.timePeriod

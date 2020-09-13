@@ -13,8 +13,6 @@ class CommentsDataSource(
     private val scope: CoroutineScope
 ) : PageKeyedDataSource<Int, CommentUI>() {
 
-    private val supervisorJob = SupervisorJob()
-
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, CommentUI>
@@ -33,15 +31,10 @@ class CommentsDataSource(
     }
 
     private fun fetchData(page: Int, action: (CommentsResultUI) -> Unit) {
-        scope.launch(getJobErrorHandler() + supervisorJob) {
+        scope.launch(Dispatchers.IO) {
             val resp = repo.fetchComments(page, articleUrl)
             val nextPage = resp.page + 24
             action(resp.copy(page = nextPage))
         }
-    }
-
-    private fun getJobErrorHandler() = CoroutineExceptionHandler { _, e ->
-        Log.e(CommentsDataSource::class.java.simpleName, "An error happened: $e")
-//        networkState.postValue(NetworkState.FAILED)
     }
 }

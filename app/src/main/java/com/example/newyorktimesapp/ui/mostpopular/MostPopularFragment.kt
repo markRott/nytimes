@@ -36,7 +36,7 @@ class MostPopularFragment : Fragment() {
         rcv_most_popular.adapter = adapter
 
         observeArticlesData()
-        observeLoadingState()
+        subscribeToLoadingState()
         observeFavoriteIds()
 
         showSettingsMenu()
@@ -44,7 +44,7 @@ class MostPopularFragment : Fragment() {
         mostPopularVM.type = MostPopularType.EMAILED
     }
 
-    private fun observeLoadingState() {
+    private fun subscribeToLoadingState() {
         mostPopularVM.loadingState.observe(viewLifecycleOwner) {
             frm_progress.isVisible = it
         }
