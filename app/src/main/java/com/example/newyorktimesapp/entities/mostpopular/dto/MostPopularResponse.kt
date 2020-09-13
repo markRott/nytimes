@@ -9,15 +9,12 @@ class MostPopularResponse(
     val status: String?,
     @SerializedName("copyright")
     val copyright: String?,
-    @SerializedName("num_results")
-    val numResults: Int?,
     @SerializedName("results")
-    val results: List<MostPopularArticle>?
+    val results: List<ArticleDto>?
 )
 
 fun MostPopularResponse.toDomain(): MostPopularUI = MostPopularUI(
     status = status ?: "",
     copyright = copyright ?: "",
-    numResults = numResults ?: 0,
     results = results?.toDomain() ?: emptyList()
 )

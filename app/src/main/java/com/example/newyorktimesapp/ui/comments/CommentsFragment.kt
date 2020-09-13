@@ -62,13 +62,15 @@ class CommentsFragment : Fragment() {
             when (it) {
                 is PaginationStatus.Loading -> frm_progress.isVisible = true
                 is PaginationStatus.NotEmpty -> frm_progress.isVisible = false
-                is PaginationStatus.Empty -> {
-                    frm_progress.isVisible = false
-                    if (adapter.itemCount == 0) {
-                        showNoCommentsView()
-                    }
-                }
+                is PaginationStatus.Empty -> emptyAction()
             }
+        }
+    }
+
+    private fun emptyAction() {
+        frm_progress.isVisible = false
+        if (adapter.itemCount == 0) {
+            showNoCommentsView()
         }
     }
 }

@@ -3,7 +3,7 @@ package com.example.newyorktimesapp.ui.mostpopular.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newyorktimesapp.R
-import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularArticleUI
+import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI
 import com.example.newyorktimesapp.utils.loadImage
 import kotlinx.android.synthetic.main.item_most_popular.view.*
 
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_most_popular.view.*
 class MostPopularVH(itemView: View, val onItemClick: (ArticleClickPayload) -> Unit) :
     RecyclerView.ViewHolder(itemView) {
 
-    fun bind(model: MostPopularArticleUI, isFavorite: Boolean) {
+    fun bind(model: ArticleUI, isFavorite: Boolean) {
         loadImage(model)
         itemView.tv_copyright.text = model.copyright
         itemView.tv_title.text = model.title
@@ -26,20 +26,20 @@ class MostPopularVH(itemView: View, val onItemClick: (ArticleClickPayload) -> Un
         favoriteAction(model)
     }
 
-    private fun loadImage(model: MostPopularArticleUI) {
+    private fun loadImage(model: ArticleUI) {
         if (model.imageUrl.isNotEmpty()) {
             itemView.iv_article.loadImage(model.imageUrl)
         } else itemView.iv_article.setImageResource(R.drawable.no_image)
     }
 
-    private fun favoriteAction(model: MostPopularArticleUI) {
+    private fun favoriteAction(model: ArticleUI) {
         itemView.iv_favorite_action.setOnClickListener {
             it.isSelected = !it.isSelected
             onItemClick(ArticleClickPayload.favoriteAction(model, it.isSelected))
         }
     }
 
-    private fun commentsAction(model: MostPopularArticleUI) {
+    private fun commentsAction(model: ArticleUI) {
         itemView.tv_comments.setOnClickListener {
             onItemClick(ArticleClickPayload.CommentsAction(model))
         }

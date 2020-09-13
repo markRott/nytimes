@@ -6,24 +6,25 @@ import androidx.lifecycle.viewModelScope
 import com.example.newyorktimesapp.data.mostpopular.MostPopularRepository
 import com.example.newyorktimesapp.entities.mostpopular.MostPopularType
 import com.example.newyorktimesapp.entities.mostpopular.TimePeriod
-import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularArticleUI
-import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularUI
+import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI
 import com.example.newyorktimesapp.ui.base.BaseVM
 import kotlinx.coroutines.launch
 
 class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
 
-    private val _data = MutableLiveData<MostPopularUI>()
+    private val _articlesLD = MutableLiveData<List<ArticleUI>>()
     private val _favoriteIds = MutableLiveData<HashSet<Long>>()
+    private val _errorLD = MutableLiveData<String>()
 
-    val articleDataLD: LiveData<MostPopularUI> = _data
+    val articlesLD: LiveData<List<ArticleUI>> = _articlesLD
     val favoriteIdsLD: LiveData<HashSet<Long>> = _favoriteIds
+    val errorLD: LiveData<String> = _errorLD
 
     var type: MostPopularType? = null
         set(value) {
             if (field != value) {
                 field = value
-                fetchMostPopularArticles()
+                fetchArticles()
             }
         }
 
@@ -31,11 +32,11 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
         set(value) {
             if (field != value) {
                 field = value
-                fetchMostPopularArticles()
+                fetchArticles()
             }
         }
 
-    fun favoriteAction(favoriteState: Boolean, model: MostPopularArticleUI) {
+    fun favoriteAction(favoriteState: Boolean, model: ArticleUI) {
         changeLoadingState(true)
         viewModelScope.launch {
             repo.updateFavoriteState(favoriteState, model)
@@ -50,12 +51,17 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
         }
     }
 
-    private fun fetchMostPopularArticles() {
+    private fun fetchArticles() {
         changeLoadingState(true)
         viewModelScope.launch {
-            val response = repo.fetchMostPopularArticles(getType(), getTimePeriod())
-            _data.value = response
-            changeLoadingState(false)
+            try {
+                val response = repo.fetchArticles(getType(), getTimePeriod())
+                _articlesLD.value = response
+                changeLoadingState(false)
+            } catch (e: Exception) {
+                _errorLD.value = e.message
+                changeLoadingState(false)
+            }
         }
     }
 

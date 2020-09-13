@@ -3,14 +3,14 @@ package com.example.newyorktimesapp.ui.mostpopular.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newyorktimesapp.R
-import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularArticleUI
+import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI
 import com.example.newyorktimesapp.utils.inflate
 
 class MostPopularAdapter(private val onItemClick: (ArticleClickPayload) -> Unit) :
     RecyclerView.Adapter<MostPopularVH>() {
 
     private val favoriteIds = mutableSetOf<Long>()
-    private val items = mutableListOf<MostPopularArticleUI>()
+    private val items = mutableListOf<ArticleUI>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MostPopularVH =
         MostPopularVH(parent.inflate(R.layout.item_most_popular), onItemClick)
@@ -22,7 +22,7 @@ class MostPopularAdapter(private val onItemClick: (ArticleClickPayload) -> Unit)
 
     override fun getItemCount(): Int = items.size
 
-    fun setArticleItems(articles: List<MostPopularArticleUI>) {
+    fun setArticleItems(articles: List<ArticleUI>) {
         items.clear()
         items.addAll(articles)
         notifyDataSetChanged()

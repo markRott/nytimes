@@ -6,7 +6,7 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_articles")
-class MostPopularArticleUI(
+class ArticleUI(
     @PrimaryKey
     @ColumnInfo(name = "id")
     val id: Long,

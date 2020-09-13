@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
 import com.example.newyorktimesapp.data.comments.CommentsRepository
 import com.example.newyorktimesapp.entities.comments.ui.CommentUI
-import com.example.newyorktimesapp.entities.comments.ui.CommentsResultUI
+import com.example.newyorktimesapp.entities.comments.ui.CommentResultUI
 import com.example.newyorktimesapp.utils.PaginationStatus
 import kotlinx.coroutines.*
 
@@ -28,7 +28,7 @@ class CommentsDataSource(
         }
     }
 
-    private fun fetchData(page: Int, action: (CommentsResultUI) -> Unit) {
+    private fun fetchData(page: Int, action: (CommentResultUI) -> Unit) {
         scope.launch(Dispatchers.IO) {
             val resp = repo.fetchComments(page, articleUrl)
             if (resp.comments.isNotEmpty()) {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -18,7 +19,6 @@ import com.example.newyorktimesapp.ui.mostpopular.adapter.MostPopularAdapter
 import kotlinx.android.synthetic.main.frg_most_popular.*
 import kotlinx.android.synthetic.main.merge_progress.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class MostPopularFragment : Fragment() {
 
@@ -35,9 +35,10 @@ class MostPopularFragment : Fragment() {
 
         rcv_most_popular.adapter = adapter
 
-        observeArticlesData()
+        subscribeToArticlesData()
         subscribeToLoadingState()
-        observeFavoriteIds()
+        subscribeToFavoriteIds()
+        subscribeToError()
 
         showSettingsMenu()
         mostPopularVM.fetchFavoriteIds()
@@ -50,15 +51,21 @@ class MostPopularFragment : Fragment() {
         }
     }
 
-    private fun observeArticlesData() {
-        mostPopularVM.articleDataLD.observe(viewLifecycleOwner) {
-            adapter.setArticleItems(it.results)
+    private fun subscribeToArticlesData() {
+        mostPopularVM.articlesLD.observe(viewLifecycleOwner) {
+            adapter.setArticleItems(it)
         }
     }
 
-    private fun observeFavoriteIds() {
+    private fun subscribeToFavoriteIds() {
         mostPopularVM.favoriteIdsLD.observe(viewLifecycleOwner) {
             adapter.setFavoriteItems(it)
+        }
+    }
+
+    private fun subscribeToError() {
+        mostPopularVM.errorLD.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -83,9 +90,14 @@ class MostPopularFragment : Fragment() {
 
     private val adapter: MostPopularAdapter = MostPopularAdapter { data ->
         when (data) {
-            is ArticleClickPayload.ArticleAction -> { }
-            is ArticleClickPayload.CommentsAction -> { openCommentsFragment(data) }
-            is ArticleClickPayload.FavoriteAction -> { favoriteAction(data) }
+            is ArticleClickPayload.ArticleAction -> {
+            }
+            is ArticleClickPayload.CommentsAction -> {
+                openCommentsFragment(data)
+            }
+            is ArticleClickPayload.FavoriteAction -> {
+                favoriteAction(data)
+            }
         }
     }
 

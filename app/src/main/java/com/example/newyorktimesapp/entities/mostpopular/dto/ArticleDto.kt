@@ -1,9 +1,9 @@
 package com.example.newyorktimesapp.entities.mostpopular.dto
 
-import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularArticleUI
+import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI
 import com.google.gson.annotations.SerializedName
 
-class MostPopularArticle(
+class ArticleDto(
     @SerializedName("uri")
     val uri: String?,
     @SerializedName("url")
@@ -27,14 +27,14 @@ class MostPopularArticle(
     @SerializedName("abstract")
     val subTitle: String?,
     @SerializedName("media")
-    val media: List<Media>?
+    val media: List<MediaDto>?
 )
 
-fun List<MostPopularArticle>.toDomain(): List<MostPopularArticleUI> {
+fun List<ArticleDto>.toDomain(): List<ArticleUI> {
     return this.map { it.toDomain() }
 }
 
-private fun MostPopularArticle.toDomain(): MostPopularArticleUI = MostPopularArticleUI(
+private fun ArticleDto.toDomain(): ArticleUI = ArticleUI(
     uri = uri ?: "",
     url = url ?: "",
     id = id,

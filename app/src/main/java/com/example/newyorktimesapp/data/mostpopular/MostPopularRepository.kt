@@ -1,13 +1,12 @@
 package com.example.newyorktimesapp.data.mostpopular
 
-import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularArticleUI
-import com.example.newyorktimesapp.entities.mostpopular.ui.MostPopularUI
+import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI
 
 interface MostPopularRepository {
 
-    suspend fun fetchMostPopularArticles(type: String, period: Int): MostPopularUI
+    suspend fun fetchArticles(type: String, period: Int): List<ArticleUI>
 
-    suspend fun updateFavoriteState(favoriteState: Boolean, model: MostPopularArticleUI)
+    suspend fun updateFavoriteState(favoriteState: Boolean, model: ArticleUI)
 
     suspend fun fetchFavoriteIds() :  HashSet<Long>
 }
