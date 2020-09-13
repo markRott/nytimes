@@ -2,6 +2,7 @@ package com.example.newyorktimesapp.ui.comments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -9,16 +10,17 @@ import com.example.newyorktimesapp.data.comments.CommentsRepository
 import com.example.newyorktimesapp.entities.comments.ui.CommentUI
 import com.example.newyorktimesapp.ui.base.BaseVM
 import com.example.newyorktimesapp.ui.comments.adapter.CommentsDataSourceFactory
+import com.example.newyorktimesapp.utils.PaginationStatus
 import com.example.newyorktimesapp.utils.SimpleBoundaryCallback
 import java.util.concurrent.Executors
 
-class CommentsVM(private val repo: CommentsRepository) : BaseVM() {
+class CommentsVM(private val repo: CommentsRepository) : ViewModel() {
 
     lateinit var commentsLD: LiveData<PagedList<CommentUI>>
         private set
 
-    private var _emptyCommentsLD: MutableLiveData<Boolean> = MutableLiveData()
-    val emptyCommentsLD: LiveData<Boolean> = _emptyCommentsLD
+    private val _paginationStatusLD = MutableLiveData<PaginationStatus>()
+    val paginationStatusLD: LiveData<PaginationStatus> = _paginationStatusLD
 
     var articleUrl: String? = null
         set(value) {
@@ -29,22 +31,9 @@ class CommentsVM(private val repo: CommentsRepository) : BaseVM() {
     private fun initPageList(articleUrl: String) {
         if (articleUrl.isEmpty()) return
 
-        changeLoadingState(true)
         val config = getPageListConfig()
-        val dsFactory = CommentsDataSourceFactory(articleUrl, repo, viewModelScope)
-        commentsLD = LivePagedListBuilder(dsFactory, config)
-            .setBoundaryCallback(boundaryCallback())
-            .build()
-    }
-
-    private fun boundaryCallback(): SimpleBoundaryCallback<CommentUI> {
-        return object : SimpleBoundaryCallback<CommentUI>() {
-            override fun onZeroItemsLoaded() {
-                super.onZeroItemsLoaded()
-                _emptyCommentsLD.value = false
-                changeLoadingState(false)
-            }
-        }
+        val dsFactory = CommentsDataSourceFactory(articleUrl, repo, viewModelScope, _paginationStatusLD)
+        commentsLD = LivePagedListBuilder(dsFactory, config).build()
     }
 
     private fun getPageListConfig(): PagedList.Config {

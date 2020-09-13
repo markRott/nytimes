@@ -16,8 +16,8 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
     private val _data = MutableLiveData<MostPopularUI>()
     private val _favoriteIds = MutableLiveData<HashSet<Long>>()
 
-    val data: LiveData<MostPopularUI> = _data
-    val favoriteIds: LiveData<HashSet<Long>> = _favoriteIds
+    val articleDataLD: LiveData<MostPopularUI> = _data
+    val favoriteIdsLD: LiveData<HashSet<Long>> = _favoriteIds
 
     var type: MostPopularType? = null
         set(value) {

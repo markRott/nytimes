@@ -51,13 +51,13 @@ class MostPopularFragment : Fragment() {
     }
 
     private fun observeArticlesData() {
-        mostPopularVM.data.observe(viewLifecycleOwner) {
+        mostPopularVM.articleDataLD.observe(viewLifecycleOwner) {
             adapter.setArticleItems(it.results)
         }
     }
 
     private fun observeFavoriteIds() {
-        mostPopularVM.favoriteIds.observe(viewLifecycleOwner) {
+        mostPopularVM.favoriteIdsLD.observe(viewLifecycleOwner) {
             adapter.setFavoriteItems(it)
         }
     }

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.newyorktimesapp.KEY_URL
 import com.example.newyorktimesapp.R
 import com.example.newyorktimesapp.ui.comments.adapter.CommentsAdapter
+import com.example.newyorktimesapp.utils.PaginationStatus
 import kotlinx.android.synthetic.main.frg_comments.*
 import kotlinx.android.synthetic.main.merge_progress.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,7 +34,6 @@ class CommentsFragment : Fragment() {
         backAction()
 
         subscribeToComments()
-        subscribeToEmptyComments()
         subscribeToLoadingState()
     }
 
@@ -52,16 +52,23 @@ class CommentsFragment : Fragment() {
         }
     }
 
-    private fun subscribeToEmptyComments() {
-        commentsVM.emptyCommentsLD.observe(viewLifecycleOwner) {
-            rcv_comments.isVisible = it
-            tv_no_comments_label.isVisible = !it
-        }
+    private fun showNoCommentsView() {
+        rcv_comments.isVisible = false
+        tv_no_comments_label.isVisible = true
     }
 
     private fun subscribeToLoadingState() {
-        commentsVM.loadingState.observe(viewLifecycleOwner) {
-            frm_progress.isVisible = it
+        commentsVM.paginationStatusLD.observe(viewLifecycleOwner) {
+            when (it) {
+                is PaginationStatus.Loading -> frm_progress.isVisible = true
+                is PaginationStatus.NotEmpty -> frm_progress.isVisible = false
+                is PaginationStatus.Empty -> {
+                    frm_progress.isVisible = false
+                    if (adapter.itemCount == 0) {
+                        showNoCommentsView()
+                    }
+                }
+            }
         }
     }
 }
