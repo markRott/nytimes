@@ -1,6 +1,6 @@
 package com.example.newyorktimesapp.entities.comments.ui
 
-class CommentUI(
+data class CommentUI(
     val commentID: Int,
     val userID: Int,
     val userDisplayName: String,

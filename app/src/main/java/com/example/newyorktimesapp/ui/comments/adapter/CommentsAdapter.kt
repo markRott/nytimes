@@ -1,19 +1,18 @@
 package com.example.newyorktimesapp.ui.comments.adapter
 
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagedListAdapter
+import com.example.newyorktimesapp.R
+import com.example.newyorktimesapp.entities.comments.ui.CommentUI
+import com.example.newyorktimesapp.utils.inflate
 
-class CommentsAdapter : RecyclerView.Adapter<CommentsVH>() {
+class CommentsAdapter() : PagedListAdapter<CommentUI, CommentsVH>(CommentDiffUtil()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsVH {
-        TODO("Not yet implemented")
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentsVH =
+        CommentsVH(parent.inflate(R.layout.item_comment))
 
     override fun onBindViewHolder(holder: CommentsVH, position: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        val model = getItem(position)
+        model?.let { holder.bind(it) }
     }
 }

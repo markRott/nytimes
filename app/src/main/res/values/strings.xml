@@ -16,5 +16,6 @@
     <string name="published">Published %1$s</string>
     <string name="updated">Updated %1$s</string>
     <string name="comments_title">Comments</string>
+    <string name="comments_geo_and_date">%1$s | %2$s</string>
 
 </resources>
