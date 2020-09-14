@@ -16,12 +16,6 @@ interface AppApi {
         @Path("period") period: Int
     ): Response<BaseResponse<List<ArticleDto>>>
 
-//    @GET("/svc/community/v3/user-content/url.json")
-//    suspend fun fetchComments(
-//        @Query("offset") offset: Int,
-//        @Query("url") url: String
-//    ): CommentsResponse
-
     @GET("/svc/community/v3/user-content/url.json")
     suspend fun fetchComments(
         @Query("offset") offset: Int,

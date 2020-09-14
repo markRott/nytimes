@@ -1,6 +1,7 @@
 package com.example.newyorktimesapp.data.base
 
 import android.util.Log
+import com.example.newyorktimesapp.api.Result
 import retrofit2.Response
 
 abstract class BaseRepository {

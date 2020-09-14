@@ -1,4 +1,4 @@
-package com.example.newyorktimesapp.data.base
+package com.example.newyorktimesapp.api
 
 enum class Status {
     SUCCESS,

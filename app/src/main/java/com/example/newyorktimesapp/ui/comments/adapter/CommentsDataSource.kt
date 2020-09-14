@@ -30,12 +30,14 @@ class CommentsDataSource(
 
     private fun fetchData(page: Int, action: (CommentResultUI) -> Unit) {
         scope.launch(Dispatchers.IO) {
+
             val resp = repo.fetchComments(page, articleUrl)
             if (resp.comments.isNotEmpty()) {
                 val nextPage = resp.page + 24
                 action(resp.copy(page = nextPage))
                 paginationStatusLD.postValue(PaginationStatus.NotEmpty)
             } else paginationStatusLD.postValue(PaginationStatus.Empty)
+
         }
     }
 
