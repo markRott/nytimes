@@ -1,9 +1,9 @@
 package com.example.newyorktimesapp.data.mostpopular
 
 import com.example.newyorktimesapp.api.AppApi
-import com.example.newyorktimesapp.data.base.AppException
+import com.example.newyorktimesapp.exception.AppException
 import com.example.newyorktimesapp.data.base.BaseRepository
-import com.example.newyorktimesapp.data.base.Status
+import com.example.newyorktimesapp.api.Status
 import com.example.newyorktimesapp.db.FavoriteArticleDao
 import com.example.newyorktimesapp.entities.mostpopular.dto.toDomain
 import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI

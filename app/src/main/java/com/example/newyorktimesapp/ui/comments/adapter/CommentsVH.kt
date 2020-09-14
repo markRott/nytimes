@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newyorktimesapp.R
 import com.example.newyorktimesapp.entities.comments.ui.CommentUI
 import com.example.newyorktimesapp.utils.loadImage
+import com.example.newyorktimesapp.utils.toHumanReadableDate
 import kotlinx.android.synthetic.main.item_comment.view.*
 
 class CommentsVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -17,7 +18,10 @@ class CommentsVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         } else itemView.iv_avatar.setImageResource(R.drawable.stub_avatar)
 
         itemView.tv_name.text = model.userDisplayName
-        itemView.tv_geo_and_date.text = ctx.getString(R.string.comments_geo_and_date, model.userLocation, model.createDate)
+        itemView.tv_geo_and_date.text = ctx.getString(
+            R.string.comments_geo_and_date,
+            model.userLocation, model.createDate.toHumanReadableDate()
+        )
         itemView.tv_comment_body.text = model.commentBody
     }
 }

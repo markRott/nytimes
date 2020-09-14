@@ -7,7 +7,7 @@ import com.example.newyorktimesapp.entities.comments.ui.CommentUI
 import com.example.newyorktimesapp.utils.PaginationStatus
 import kotlinx.coroutines.CoroutineScope
 
-class CommentsDataSourceFactory(
+class CommentsDSFactory(
     private val articleUrl: String,
     private val repo: CommentsRepository,
     private val scope: CoroutineScope,

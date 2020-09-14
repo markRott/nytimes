@@ -90,14 +90,9 @@ class MostPopularFragment : Fragment() {
 
     private val adapter: MostPopularAdapter = MostPopularAdapter { data ->
         when (data) {
-            is ArticleClickPayload.ArticleAction -> {
-            }
-            is ArticleClickPayload.CommentsAction -> {
-                openCommentsFragment(data)
-            }
-            is ArticleClickPayload.FavoriteAction -> {
-                favoriteAction(data)
-            }
+            is ArticleClickPayload.ArticleAction -> Unit
+            is ArticleClickPayload.CommentsAction -> { openCommentsFragment(data) }
+            is ArticleClickPayload.FavoriteAction -> { favoriteAction(data) }
         }
     }
 

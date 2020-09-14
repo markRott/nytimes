@@ -37,11 +37,9 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
         }
 
     fun favoriteAction(favoriteState: Boolean, model: ArticleUI) {
-        changeLoadingState(true)
         viewModelScope.launch {
             repo.updateFavoriteState(favoriteState, model)
             _favoriteIds.value = repo.fetchFavoriteIds()
-            changeLoadingState(false)
         }
     }
 

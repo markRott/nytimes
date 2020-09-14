@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 open class BaseVM : ViewModel() {
 
-    protected val _loadingState = MutableLiveData<Boolean>()
+    private val _loadingState = MutableLiveData<Boolean>()
     val loadingState: LiveData<Boolean> = _loadingState
 
     protected fun changeLoadingState(state: Boolean) {
