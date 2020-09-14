@@ -41,8 +41,7 @@ class MostPopularFragment : Fragment() {
         subscribeToError()
 
         showSettingsMenu()
-        mostPopularVM.fetchFavoriteIds()
-        mostPopularVM.type = MostPopularType.EMAILED
+//        mostPopularVM.fetchFavoriteIds()
     }
 
     private fun subscribeToLoadingState() {

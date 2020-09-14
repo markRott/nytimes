@@ -20,7 +20,7 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
     val favoriteIdsLD: LiveData<HashSet<Long>> = _favoriteIds
     val errorLD: LiveData<String> = _errorLD
 
-    var type: MostPopularType? = null
+    var type: MostPopularType = MostPopularType.EMAILED
         set(value) {
             if (field != value) {
                 field = value
@@ -28,13 +28,18 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
             }
         }
 
-    var timePeriod: TimePeriod? = null
+    var timePeriod: TimePeriod = TimePeriod.ONE_DAY
         set(value) {
             if (field != value) {
                 field = value
                 fetchArticles()
             }
         }
+
+    init {
+        fetchFavoriteIds()
+        fetchArticles()
+    }
 
     fun favoriteAction(favoriteState: Boolean, model: ArticleUI) {
         viewModelScope.launch {
@@ -43,7 +48,7 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
         }
     }
 
-    fun fetchFavoriteIds() {
+    private fun fetchFavoriteIds() {
         viewModelScope.launch {
             _favoriteIds.value = repo.fetchFavoriteIds()
         }
@@ -63,7 +68,7 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
         }
     }
 
-    private fun getType(): String = type?.popularType ?: MostPopularType.EMAILED.popularType
+    private fun getType(): String = type.popularType
 
-    private fun getTimePeriod(): Int = timePeriod?.timePeriod ?: TimePeriod.ONE_DAY.timePeriod
+    private fun getTimePeriod(): Int = timePeriod.timePeriod
 }

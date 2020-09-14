@@ -18,7 +18,7 @@ val networkModule = module {
 
 private fun provideOkHttpClient(authInterceptor: ApiKeyInterceptor): OkHttpClient {
     val logging = HttpLoggingInterceptor()
-    logging.level = (HttpLoggingInterceptor.Level.BODY)
+    logging.level = (HttpLoggingInterceptor.Level.BASIC)
     return OkHttpClient()
         .newBuilder()
         .addInterceptor(authInterceptor)
