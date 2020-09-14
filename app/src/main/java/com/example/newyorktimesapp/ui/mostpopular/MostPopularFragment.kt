@@ -6,21 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.example.newyorktimesapp.KEY_URL
 import com.example.newyorktimesapp.R
 import com.example.newyorktimesapp.entities.mostpopular.MostPopularType
 import com.example.newyorktimesapp.entities.mostpopular.TimePeriod
-import com.example.newyorktimesapp.ui.mostpopular.adapter.ArticleClickPayload
-import com.example.newyorktimesapp.ui.mostpopular.adapter.MostPopularAdapter
+import com.example.newyorktimesapp.ui.common.ArticleClickPayload
+import com.example.newyorktimesapp.ui.common.BaseArticleFragment
 import kotlinx.android.synthetic.main.frg_most_popular.*
 import kotlinx.android.synthetic.main.merge_progress.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MostPopularFragment : Fragment() {
+class MostPopularFragment : BaseArticleFragment() {
 
     private val mostPopularVM: MostPopularVM by viewModel()
 
@@ -33,7 +29,7 @@ class MostPopularFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        rcv_most_popular.adapter = adapter
+        rcv_most_popular.adapter = articlesAdapter
 
         subscribeToArticlesData()
         subscribeToLoadingState()
@@ -52,13 +48,13 @@ class MostPopularFragment : Fragment() {
 
     private fun subscribeToArticlesData() {
         mostPopularVM.articlesLD.observe(viewLifecycleOwner) {
-            adapter.setArticleItems(it)
+            articlesAdapter.setArticleItems(it)
         }
     }
 
     private fun subscribeToFavoriteIds() {
         mostPopularVM.favoriteIdsLD.observe(viewLifecycleOwner) {
-            adapter.setFavoriteItems(it)
+            articlesAdapter.setFavoriteItems(it)
         }
     }
 
@@ -93,20 +89,7 @@ class MostPopularFragment : Fragment() {
         }
     }
 
-    private val adapter: MostPopularAdapter = MostPopularAdapter { data ->
-        when (data) {
-            is ArticleClickPayload.ArticleAction -> Unit
-            is ArticleClickPayload.CommentsAction -> { openCommentsFragment(data) }
-            is ArticleClickPayload.FavoriteAction -> { favoriteAction(data) }
-        }
-    }
-
-    private fun openCommentsFragment(data: ArticleClickPayload.CommentsAction) {
-        val bundle = bundleOf(KEY_URL to data.model.url)
-        findNavController().navigate(R.id.commentsFragment, bundle)
-    }
-
-    private fun favoriteAction(data: ArticleClickPayload.FavoriteAction) {
+    override fun favoriteAction(data: ArticleClickPayload.FavoriteAction) {
         mostPopularVM.favoriteAction(data.favoriteState, data.model)
     }
 }

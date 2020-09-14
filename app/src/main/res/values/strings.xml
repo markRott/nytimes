@@ -2,7 +2,7 @@
     <string name="app_name">NewYorkTimesApp</string>
     <string name="title_most_popular">Most Popular</string>
     <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_favorites">Favorites</string>
     <string name="most_popular_articles">Most: %1$s</string>
     <string name="most_emailed_articles">Most emailed articles</string>
     <string name="most_shared_articles">Most shared articles</string>
@@ -18,5 +18,7 @@
     <string name="comments_title">Comments</string>
     <string name="comments_geo_and_date">%1$s | %2$s</string>
     <string name="no_comments_label">There are no comments on this article</string>
+    <string name="favorites">Favorites</string>
+    <string name="empty_favorite_label">There is no added articles</string>
 
 </resources>

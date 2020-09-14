@@ -11,8 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MostPopularRepositoryImpl(
-    private val api: AppApi,
-    private val dao: FavoriteArticleDao
+    private val api: AppApi
 ) : MostPopularRepository {
 
     override suspend fun fetchArticles(type: String, period: Int): List<ArticleUI> {
@@ -21,15 +20,5 @@ class MostPopularRepositoryImpl(
             if(result.status == Status.ERROR) throw AppException(result.msg ?: "Something went wrong")
             return@withContext result.data?.results?.toDomain() ?: emptyList()
         }
-    }
-
-    override suspend fun updateFavoriteState(favoriteState: Boolean, model: ArticleUI) {
-        return withContext(Dispatchers.IO) {
-            if (favoriteState) dao.addArticleToFavorite(model) else dao.removeFromFavorite(model)
-        }
-    }
-
-    override suspend fun fetchFavoriteIds(): HashSet<Long> {
-        return dao.fetchAllArticles().map { it.id }.toHashSet()
     }
 }

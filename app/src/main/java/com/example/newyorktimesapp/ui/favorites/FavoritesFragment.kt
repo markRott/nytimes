@@ -1,31 +1,48 @@
-package com.example.newyorktimesapp.ui.notifications
+package com.example.newyorktimesapp.ui.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.core.view.isVisible
 import com.example.newyorktimesapp.R
+import com.example.newyorktimesapp.ui.common.ArticleClickPayload
+import com.example.newyorktimesapp.ui.common.BaseArticleFragment
+import kotlinx.android.synthetic.main.frg_favorites.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class NotificationsFragment : Fragment() {
+class FavoritesFragment : BaseArticleFragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private val favoritesVM: FavoritesVM by viewModel()
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(R.layout.frg_favorites, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        rcv_favorites.adapter = articlesAdapter
+
+        favoritesVM.articlesLD.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                rcv_favorites.isVisible = false
+                tv_no_favorite.isVisible = true
+            } else {
+                rcv_favorites.isVisible = true
+                tv_no_favorite.isVisible = false
+                articlesAdapter.setArticleItems(it)
+            }
+        }
+
+        favoritesVM.favoriteIdsLD.observe(viewLifecycleOwner) {
+            articlesAdapter.setFavoriteItems(it)
+        }
+    }
+
+    override fun favoriteAction(data: ArticleClickPayload.FavoriteAction) {
+        favoritesVM.favoriteAction(data.favoriteState, data.model)
     }
 }

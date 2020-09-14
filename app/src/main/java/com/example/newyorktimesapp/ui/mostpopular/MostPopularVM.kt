@@ -3,6 +3,7 @@ package com.example.newyorktimesapp.ui.mostpopular
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.newyorktimesapp.data.favorite.FavoriteRepository
 import com.example.newyorktimesapp.data.mostpopular.MostPopularRepository
 import com.example.newyorktimesapp.entities.mostpopular.MostPopularType
 import com.example.newyorktimesapp.entities.mostpopular.TimePeriod
@@ -10,7 +11,10 @@ import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI
 import com.example.newyorktimesapp.ui.base.BaseVM
 import kotlinx.coroutines.launch
 
-class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
+class MostPopularVM(
+    private val articleRepo: MostPopularRepository,
+    private val favoriteRepo: FavoriteRepository
+) : BaseVM() {
 
     private val _articlesLD = MutableLiveData<List<ArticleUI>>()
     private val _favoriteIdsLD = MutableLiveData<HashSet<Long>>()
@@ -48,14 +52,14 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
 
     fun favoriteAction(favoriteState: Boolean, model: ArticleUI) {
         viewModelScope.launch {
-            repo.updateFavoriteState(favoriteState, model)
-            _favoriteIdsLD.value = repo.fetchFavoriteIds()
+            favoriteRepo.updateFavoriteState(favoriteState, model)
+            _favoriteIdsLD.value = favoriteRepo.fetchArticlesIds().toHashSet()
         }
     }
 
     private fun fetchFavoriteIds() {
         viewModelScope.launch {
-            _favoriteIdsLD.value = repo.fetchFavoriteIds()
+            _favoriteIdsLD.value = favoriteRepo.fetchArticlesIds().toHashSet()
         }
     }
 
@@ -63,7 +67,7 @@ class MostPopularVM(private val repo: MostPopularRepository) : BaseVM() {
         changeLoadingState(true)
         viewModelScope.launch {
             try {
-                val response = repo.fetchArticles(getType(), getTimePeriod())
+                val response = articleRepo.fetchArticles(getType(), getTimePeriod())
                 _articlesLD.value = response
                 changeLoadingState(false)
             } catch (e: Exception) {

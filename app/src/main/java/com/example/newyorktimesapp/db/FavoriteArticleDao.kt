@@ -14,4 +14,7 @@ interface FavoriteArticleDao {
 
     @Delete
     suspend fun removeFromFavorite(model: ArticleUI)
+
+    @Query("SELECT id FROM favorite_articles")
+    suspend fun fetchArticlesIds() : List<Long>
 }
