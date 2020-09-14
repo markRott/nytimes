@@ -8,11 +8,8 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.newyorktimesapp.data.comments.CommentsRepository
 import com.example.newyorktimesapp.entities.comments.ui.CommentUI
-import com.example.newyorktimesapp.ui.base.BaseVM
-import com.example.newyorktimesapp.ui.comments.adapter.CommentsDataSourceFactory
+import com.example.newyorktimesapp.ui.comments.adapter.CommentsDSFactory
 import com.example.newyorktimesapp.utils.PaginationStatus
-import com.example.newyorktimesapp.utils.SimpleBoundaryCallback
-import java.util.concurrent.Executors
 
 class CommentsVM(private val repo: CommentsRepository) : ViewModel() {
 
@@ -24,15 +21,16 @@ class CommentsVM(private val repo: CommentsRepository) : ViewModel() {
 
     var articleUrl: String? = null
         set(value) {
-            field = value
-            initPageList(value ?: "")
+            if (field == null) {
+                field = value
+                initPageList(value ?: "")
+            }
         }
 
     private fun initPageList(articleUrl: String) {
         if (articleUrl.isEmpty()) return
-
         val config = getPageListConfig()
-        val dsFactory = CommentsDataSourceFactory(articleUrl, repo, viewModelScope, _paginationStatusLD)
+        val dsFactory = CommentsDSFactory(articleUrl, repo, viewModelScope, _paginationStatusLD)
         commentsLD = LivePagedListBuilder(dsFactory, config).build()
     }
 

@@ -11,7 +11,7 @@
     <string name="_1_day">1 day</string>
     <string name="_7_days">7 days</string>
     <string name="_30_days">30 days</string>
-    <string name="comments">comments</string>
+    <string name="comments">Comments</string>
 
     <string name="published">Published %1$s</string>
     <string name="updated">Updated %1$s</string>

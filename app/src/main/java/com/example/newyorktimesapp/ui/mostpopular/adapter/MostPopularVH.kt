@@ -8,8 +8,7 @@ import com.example.newyorktimesapp.utils.loadImage
 import kotlinx.android.synthetic.main.item_most_popular.view.*
 
 
-class MostPopularVH(itemView: View, val onItemClick: (ArticleClickPayload) -> Unit) :
-    RecyclerView.ViewHolder(itemView) {
+class MostPopularVH(itemView: View, val onItemClick: (ArticleClickPayload) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(model: ArticleUI, isFavorite: Boolean) {
         loadImage(model)
@@ -41,7 +40,7 @@ class MostPopularVH(itemView: View, val onItemClick: (ArticleClickPayload) -> Un
 
     private fun commentsAction(model: ArticleUI) {
         itemView.tv_comments.setOnClickListener {
-            onItemClick(ArticleClickPayload.CommentsAction(model))
+            onItemClick(ArticleClickPayload.commentsAction(model))
         }
     }
 }
