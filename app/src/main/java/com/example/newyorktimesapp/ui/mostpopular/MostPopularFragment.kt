@@ -39,10 +39,9 @@ class MostPopularFragment : Fragment() {
         subscribeToLoadingState()
         subscribeToFavoriteIds()
         subscribeToError()
+        subscribeToHeaderText()
 
         showSettingsMenu()
-        mostPopularVM.fetchFavoriteIds()
-        mostPopularVM.type = MostPopularType.EMAILED
     }
 
     private fun subscribeToLoadingState() {
@@ -66,6 +65,12 @@ class MostPopularFragment : Fragment() {
     private fun subscribeToError() {
         mostPopularVM.errorLD.observe(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun subscribeToHeaderText() {
+        mostPopularVM.headerLD.observe(viewLifecycleOwner) {
+            tv_header.text = it
         }
     }
 

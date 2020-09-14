@@ -1,7 +1,5 @@
 package com.example.newyorktimesapp.entities.comments.dto
 
-
-import com.example.newyorktimesapp.entities.comments.ui.CommentUI
 import com.google.gson.annotations.SerializedName
 
 class CommentDto(
@@ -26,18 +24,3 @@ class CommentDto(
     @SerializedName("createDate")
     val createDate: String?
 )
-
-private fun CommentDto.toDomain(): CommentUI = CommentUI(
-    commentID = commentID,
-    userID = userID,
-    userDisplayName = userDisplayName ?: "",
-    userLocation = userLocation ?: "",
-    userTitle = userTitle ?: "",
-    userURL = userURL ?: "",
-    picURL = picURL ?: "",
-    commentTitle = commentTitle ?: "",
-    commentBody = commentBody ?: "",
-    createDate = createDate ?: ""
-)
-
-fun List<CommentDto>.toDomain() : List<CommentUI> = this.map { it.toDomain() }
