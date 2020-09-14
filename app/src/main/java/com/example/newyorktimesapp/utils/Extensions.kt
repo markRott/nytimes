@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,4 +29,13 @@ fun String.toHumanReadableDate(): String {
     } catch (e: Exception) {
         ""
     }
+}
+
+fun <T> MutableLiveData<List<T>>.removeItem(item: T) {
+    val currValue = this.value ?: emptyList()
+    this.value = currValue - listOf(item)
+}
+
+fun <T> MutableLiveData<T>.updateMutableLiveData() {
+    this.value = this.value
 }

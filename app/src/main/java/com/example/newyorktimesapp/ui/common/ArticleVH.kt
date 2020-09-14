@@ -1,14 +1,13 @@
-package com.example.newyorktimesapp.ui.mostpopular.adapter
+package com.example.newyorktimesapp.ui.common
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newyorktimesapp.R
 import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI
 import com.example.newyorktimesapp.utils.loadImage
-import kotlinx.android.synthetic.main.item_most_popular.view.*
+import kotlinx.android.synthetic.main.item_article.view.*
 
-
-class MostPopularVH(itemView: View, val onItemClick: (ArticleClickPayload) -> Unit) : RecyclerView.ViewHolder(itemView) {
+class ArticleVH(itemView: View, val onItemClick: (ArticleClickPayload) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(model: ArticleUI, isFavorite: Boolean) {
         loadImage(model)
