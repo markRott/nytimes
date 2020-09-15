@@ -1,10 +1,14 @@
 package com.example.newyorktimesapp.utils
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
@@ -38,4 +42,10 @@ fun <T> MutableLiveData<List<T>>.removeItem(item: T) {
 
 fun <T> MutableLiveData<T>.updateMutableLiveData() {
     this.value = this.value
+}
+
+fun Context.showToast(msg: String){
+    val toast = makeText(this, msg, Toast.LENGTH_SHORT)
+    toast.setGravity(Gravity.CENTER, 0, 0)
+    toast.show()
 }
