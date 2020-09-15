@@ -9,22 +9,18 @@
 
     <FrameLayout
         android:id="@+id/frm_header"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/colorPrimary"
+        style="@style/ContainerHeaderStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/HeaderTextStyle"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
-            android:text="@string/most_popular_articles"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:text="@string/most_popular_title"
+            />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_settings"
