@@ -12,6 +12,7 @@ import com.example.newyorktimesapp.entities.mostpopular.MostPopularType
 import com.example.newyorktimesapp.entities.mostpopular.TimePeriod
 import com.example.newyorktimesapp.ui.common.ArticleClickPayload
 import com.example.newyorktimesapp.ui.common.BaseArticleFragment
+import com.example.newyorktimesapp.utils.showToast
 import kotlinx.android.synthetic.main.frg_most_popular.*
 import kotlinx.android.synthetic.main.merge_progress.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -60,7 +61,7 @@ class MostPopularFragment : BaseArticleFragment() {
 
     private fun subscribeToError() {
         mostPopularVM.errorLD.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            requireContext().showToast(it)
         }
     }
 

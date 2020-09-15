@@ -8,8 +8,6 @@ const val TAG: String = "ApiInfo"
 
 suspend fun <T> getResult(action: suspend () -> Response<T>): Result<T> {
     try {
-        Log.d(TAG, Thread.currentThread().name)
-
         val response = action()
         if (response.isSuccessful) {
             val body = response.body()
@@ -20,7 +18,7 @@ suspend fun <T> getResult(action: suspend () -> Response<T>): Result<T> {
         return Result.error(finalMsg)
 
     } catch (e: Exception) {
-        Log.e(TAG, "Get result exception: ", e)
+        Log.e(TAG, "Get result exception: ${e.message}")
         return Result.error(e.message ?: e.toString())
     }
 }

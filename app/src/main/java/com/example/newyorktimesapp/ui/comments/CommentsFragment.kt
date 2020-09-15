@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.newyorktimesapp.KEY_URL
 import com.example.newyorktimesapp.R
 import com.example.newyorktimesapp.ui.comments.adapter.CommentsAdapter
 import com.example.newyorktimesapp.utils.PaginationStatus
+import com.example.newyorktimesapp.utils.showToast
 import kotlinx.android.synthetic.main.frg_comments.*
 import kotlinx.android.synthetic.main.merge_progress.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,6 +65,10 @@ class CommentsFragment : Fragment() {
                 is PaginationStatus.Loading -> frm_progress.isVisible = true
                 is PaginationStatus.NotEmpty -> frm_progress.isVisible = false
                 is PaginationStatus.Empty -> emptyAction()
+                is PaginationStatus.Error -> {
+                    frm_progress.isVisible = false
+                    requireContext().showToast(it.errorMsg)
+                }
             }
         }
     }
