@@ -9,13 +9,20 @@ import com.example.newyorktimesapp.data.mostpopular.MostPopularRepositoryImpl
 import com.example.newyorktimesapp.ui.comments.CommentsVM
 import com.example.newyorktimesapp.ui.favorites.FavoritesVM
 import com.example.newyorktimesapp.ui.mostpopular.MostPopularVM
+import com.example.newyorktimesapp.utils.ResourceProviderImpl
+import com.example.newyorktimesapp.utils.ResourcesProvider
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+
+val resourceProviderModule = module {
+    single<ResourcesProvider> { ResourceProviderImpl(androidApplication()) }
+}
 
 val mostPopularModule = module {
     single<MostPopularRepository> { MostPopularRepositoryImpl(api = get()) }
     single<FavoriteRepository> { FavoriteRepositoryImpl(dao = get()) }
-    viewModel { MostPopularVM(articleRepo = get(), favoriteRepo = get()) }
+    viewModel { MostPopularVM(articleRepo = get(), favoriteRepo = get(), resourceProvider = get()) }
 }
 
 val commentsModule = module {
@@ -24,6 +31,5 @@ val commentsModule = module {
 }
 
 val favoriteModule = module {
-//    single<FavoriteRepository> { FavoriteRepositoryImpl(dao = get()) }
     viewModel { FavoritesVM(get()) }
 }

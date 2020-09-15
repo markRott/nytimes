@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.comments.CommentsFragment">
 
     <LinearLayout
         android:id="@+id/ll_header"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/colorPrimary"
+        style="@style/ContainerHeaderStyle"
         android:orientation="horizontal"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,13 +23,9 @@
             app:srcCompat="@drawable/back_arrow" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/HeaderTextStyle"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="10dp"
-            android:text="@string/comments_title"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:text="@string/comments_title" />
 
     </LinearLayout>
 
@@ -45,13 +38,13 @@
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="13"
-        tools:listitem="@layout/item_comment"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_header" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_header"
+        tools:itemCount="13"
+        tools:listitem="@layout/item_comment" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_no_comments_label"
@@ -68,8 +61,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_header"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/ll_header" />
 
     <include layout="@layout/merge_progress" />
 

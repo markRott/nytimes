@@ -15,6 +15,7 @@ class MyApp : Application() {
             modules(
                 networkModule,
                 databaseModule,
+                resourceProviderModule,
                 mostPopularModule,
                 commentsModule,
                 favoriteModule

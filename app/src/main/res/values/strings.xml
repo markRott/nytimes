@@ -3,7 +3,7 @@
     <string name="title_most_popular">Most Popular</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_favorites">Favorites</string>
-    <string name="most_popular_articles">Most: %1$s</string>
+<!--    <string name="most_popular_articles">Most: %1$s</string>-->
     <string name="most_emailed_articles">Most emailed articles</string>
     <string name="most_shared_articles">Most shared articles</string>
     <string name="most_viewed_articles">Most viewed articles</string>
@@ -20,5 +20,6 @@
     <string name="no_comments_label">There are no comments on this article</string>
     <string name="favorites">Favorites</string>
     <string name="empty_favorite_label">There is no added articles</string>
+    <string name="most_popular_title">%1$s of time: %2$s day(s)</string>
 
 </resources>

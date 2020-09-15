@@ -3,17 +3,20 @@ package com.example.newyorktimesapp.ui.mostpopular
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.newyorktimesapp.R
 import com.example.newyorktimesapp.data.favorite.FavoriteRepository
 import com.example.newyorktimesapp.data.mostpopular.MostPopularRepository
 import com.example.newyorktimesapp.entities.mostpopular.MostPopularType
 import com.example.newyorktimesapp.entities.mostpopular.TimePeriod
 import com.example.newyorktimesapp.entities.mostpopular.ui.ArticleUI
 import com.example.newyorktimesapp.ui.base.BaseVM
+import com.example.newyorktimesapp.utils.ResourcesProvider
 import kotlinx.coroutines.launch
 
 class MostPopularVM(
     private val articleRepo: MostPopularRepository,
-    private val favoriteRepo: FavoriteRepository
+    private val favoriteRepo: FavoriteRepository,
+    private val resourceProvider: ResourcesProvider
 ) : BaseVM() {
 
     private val _articlesLD = MutableLiveData<List<ArticleUI>>()
@@ -77,12 +80,15 @@ class MostPopularVM(
         }
     }
 
-    private fun prepareHeaderText(){
-        val header = "${getType()} of time ${getTimePeriod()}"
-        _headerTextLD.value = header
+    private fun prepareHeaderText() {
+        val text = resourceProvider.getString(
+            R.string.most_popular_title,
+            getType().capitalize(),
+            getTimePeriod())
+        _headerTextLD.value = text
     }
 
     private fun getType(): String = type.popularType
 
-    private fun getTimePeriod(): Int = timePeriod.timePeriod
+    private fun getTimePeriod(): Int = timePeriod.period
 }
