@@ -3,5 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="most_popular_round">10dp</dimen>
-
+    <integer name="anim_time">250</integer>
 </resources>
