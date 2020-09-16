@@ -7,11 +7,6 @@
         android:title="@string/title_most_popular" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
-
-    <item
         android:id="@+id/favorites"
         android:icon="@drawable/favorite_gray"
         android:title="@string/title_favorites" />
