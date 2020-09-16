@@ -5,7 +5,8 @@ For this application I used api: https://developer.nytimes.com
 
 ---
 
-Link to debug apk file(link to google drive): [shorturl.at/cmJY5](url)
+Link to debug apk file(link to google drive): [shorturl.at/cmJY5](url).
+
 You can see an example of how the application works at the YouTube link: https://youtu.be/ZvIVPCRE5mc
 
 ---
