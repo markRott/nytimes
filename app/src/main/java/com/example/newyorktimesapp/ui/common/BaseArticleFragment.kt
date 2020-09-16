@@ -4,6 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.example.newyorktimesapp.KEY_TITLE
 import com.example.newyorktimesapp.KEY_URL
 import com.example.newyorktimesapp.R
 
@@ -20,7 +21,7 @@ abstract class BaseArticleFragment : Fragment() {
 
     protected val articlesAdapter: ArticleAdapter = ArticleAdapter { data ->
         when (data) {
-            is ArticleClickPayload.ArticleAction -> Unit
+            is ArticleClickPayload.ArticleAction -> {openArticleDetailFragment(data)}
             is ArticleClickPayload.CommentsAction -> { openCommentsFragment(data) }
             is ArticleClickPayload.FavoriteAction -> { favoriteAction(data) }
         }
@@ -29,6 +30,11 @@ abstract class BaseArticleFragment : Fragment() {
     private fun openCommentsFragment(data: ArticleClickPayload.CommentsAction) {
         val bundle = bundleOf(KEY_URL to data.model.url)
         findNavController().navigate(R.id.commentsFragment, bundle, navOptions)
+    }
+
+    private fun openArticleDetailFragment(data: ArticleClickPayload.ArticleAction) {
+        val bundle = bundleOf(KEY_URL to data.model.url, KEY_TITLE to data.model.title)
+        findNavController().navigate(R.id.articleDetailFragment, bundle, navOptions)
     }
 
     abstract fun favoriteAction(data: ArticleClickPayload.FavoriteAction)

@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.example.newyorktimesapp.KEY_URL
@@ -45,7 +44,7 @@ class CommentsFragment : Fragment() {
     }
 
     private fun backAction() {
-        iv_back_from_comments.setOnClickListener { findNavController().popBackStack() }
+        iv_back.setOnClickListener { findNavController().popBackStack() }
     }
 
     private fun subscribeToComments() {
