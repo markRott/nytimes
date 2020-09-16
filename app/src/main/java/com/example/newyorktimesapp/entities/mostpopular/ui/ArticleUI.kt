@@ -32,4 +32,9 @@ class ArticleUI(
     val imageUrl: String,
     @ColumnInfo(name = "copyright")
     val copyright: String
-)
+) {
+
+    override fun toString(): String {
+        return "url=$url"
+    }
+}
