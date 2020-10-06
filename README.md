@@ -1,6 +1,6 @@
 **New York Times Reader**
 
-A small project for viewing and reading articles from the New York Times newspaper.
+A small project for viewing and reading articles from the New York Times newspaper. This project was written using MVVM architecture. 
 For this application I used api: https://developer.nytimes.com
 
 ---
