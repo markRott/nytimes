@@ -13,6 +13,7 @@ You can see an example of how the application works at the YouTube link: https:/
 
 **To develop this application, I used the following technologies:**
 
+ * MVVM
  * Coroutines
  * ViewModel
  * LiveData
