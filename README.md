@@ -5,9 +5,11 @@ For this application I used api: https://developer.nytimes.com
 
 ---
 
-Link to debug apk file(link to google drive): https://drive.google.com/drive/folders/1LLM1t-pTrvufE0rDKgC3TROxRauJTUua?usp=sharing
+Link to debug apk file(**link to google drive**): https://drive.google.com/drive/folders/1LLM1t-pTrvufE0rDKgC3TROxRauJTUua?usp=sharing
 
-You can see an example of how the application works at the YouTube link: https://youtu.be/ZvIVPCRE5mc
+---
+
+You can see an example of how the application works at the **YouTube link**: https://youtu.be/ZvIVPCRE5mc
 
 ---
 
