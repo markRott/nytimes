@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import com.example.newyorktimesapp.R
 import com.example.newyorktimesapp.ui.common.ArticleClickPayload
@@ -40,6 +41,9 @@ class FavoritesFragment : BaseArticleFragment() {
         favoritesVM.favoriteIdsLD.observe(viewLifecycleOwner) {
             articlesAdapter.setFavoriteItems(it)
         }
+
+        val c = context?.cacheDir
+        val v = requireContext().cacheDir
     }
 
     override fun favoriteAction(data: ArticleClickPayload.FavoriteAction) {
